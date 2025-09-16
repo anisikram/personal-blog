@@ -1,11 +1,47 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BlogLayout from '../layouts/BlogLayout.astro';
+import CV from '../components/CV.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+).slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BlogLayout title="Accueil">
+  <div class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Left Column: Latest Articles -->
+    <div>
+      <h2 class="text-3xl font-bold mb-6">Derniers Articles</h2>
+      <div class="space-y-6">
+        {posts.map(post => (
+          <div class="card bg-base-100 shadow-xl">
+            <figure><img src={post.data.image} alt={post.data.title} /></figure>
+            <div class="card-body">
+              <h3 class="card-title">{post.data.title}</h3>
+              <p>{post.data.description}</p>
+              <div class="card-actions justify-end">
+                <a href={`/blog/${post.slug}/`} class="btn btn-primary btn-sm">Lire la suite</a>
+              </div>
+			  <div class="text-sm text-gray-500 mt-4">
+				<span>{post.data.author}</span> &bull; 
+				<time datetime={post.data.date.toISOString()}>
+				  {post.data.date.toLocaleDateString('fr-FR', {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric',
+				  })}
+				</time>
+			  </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Right Column: CV Component -->
+    <div>
+      <CV />
+    </div>
+  </div>
+</BlogLayout>

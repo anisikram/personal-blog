@@ -1,2 +1,61 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.prose :where(pre) {
+    --tw-bg-opacity: 1;
+    background-color: hsl(var(--b2, var(--b1)) / var(--tw-bg-opacity));
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.prose :where(code) {
+    font-family: monospace;
+    font-size: 0.875em;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    border-radius: 0.2em;
+    background-color: hsl(var(--b2, var(--b1)) / var(--tw-bg-opacity));
+}
+
+.prose :where(a) {
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--p) / 0.4);
+    transition: all 0.2s ease-in-out;
+}
+
+.prose :where(a):hover {
+    text-decoration-color: hsl(var(--p));
+}
+
+.prose :where(h1, h2, h3, h4, h5, h6) {
+    scroll-margin-top: 5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.prose h1 {
+    font-size: 2.5em;
+}
+
+.prose h2 {
+    font-size: 2em;
+}
+
+.prose h3 {
+    font-size: 1.75em;
+}
+
+.prose h4 {
+    font-size: 1.5em;
+}
+
+.prose h5 {
+    font-size: 1.25em;
+}
+
+.prose h6 {
+    font-size: 1em;
+}

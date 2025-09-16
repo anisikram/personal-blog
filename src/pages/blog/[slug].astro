@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  return allPosts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await post.render();
+---
+
+<BlogLayout title={post.data.title}>
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex flex-wrap lg:flex-nowrap">
+      {headings && headings.length > 0 && (
+        <aside class="w-full lg:w-1/4 lg:pr-8 mb-8 lg:mb-0">
+          <div class="sticky top-20">
+            <div class="p-4 bg-base-200 rounded-lg">
+              <h2 class="text-xl font-bold mb-2">Table des matières</h2>
+              <ul>
+                {headings.map(heading => (
+                  <li class={`ml-${(heading.depth - 1) * 4}`}>
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </aside>
+      )}
+
+      <main class="w-full lg:w-3/4">
+        <article class="prose lg:prose-xl max-w-none">
+          <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold">{post.data.title}</h1>
+            <p class="text-lg italic">
+              Publié le: {post.data.date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })} par {post.data.author}
+            </p>
+          </div>
+          <img src={post.data.image} alt={post.data.title} class="w-full h-auto rounded-lg mb-8">
+          <Content />
+        </article>
+      </main>
+    </div>
+  </div>
+</BlogLayout>

@@ -1,0 +1,37 @@
+---
+import Search from "astro-pagefind/components/Search";
+import BlogLayout from "../layouts/BlogLayout.astro";
+---
+
+<BlogLayout title="Recherche">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6">Recherche</h1>
+        <p class="mb-4">
+            Utilisez la barre de recherche ci-dessous pour trouver des articles
+            sur le blog.
+        </p>
+        <Search
+            id="search"
+            className="pagefind-ui"
+            uiOptions={{ showImages: false }}
+        />
+    </div>
+</BlogLayout>
+
+<style is:global>
+    :root[data-theme="cupcake"] {
+        --pagefind-ui-primary: #1a202c;
+        --pagefind-ui-text: #1a202c;
+        --pagefind-ui-background: #ffffff;
+        --pagefind-ui-border: #d1d5db;
+        --pagefind-ui-tag: #f3f4f6;
+    }
+
+    :root[data-theme="dark"] {
+        --pagefind-ui-primary: #ffffff;
+        --pagefind-ui-text: #ffffff;
+        --pagefind-ui-background: #1a202c;
+        --pagefind-ui-border: #4a5568;
+        --pagefind-ui-tag: #2d3748;
+    }
+</style>
