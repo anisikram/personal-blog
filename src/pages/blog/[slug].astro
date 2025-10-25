@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
+import MediaLightbox from '../../components/MediaLightbox.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
@@ -43,9 +44,48 @@ const { Content, headings } = await post.render();
             </p>
           </div>
           <img src={post.data.image} alt={post.data.title} class="w-full h-auto rounded-lg mb-8">
-          <Content />
+          <div class="article-content space-y-6">
+            <Content />
+          </div>
         </article>
+        <MediaLightbox targetSelector=".article-content img, .article-content svg" />
       </main>
     </div>
   </div>
 </BlogLayout>
+
+<style>
+  :global(.article-content img),
+  :global(.article-content svg) {
+    display: block;
+    margin: 2.5rem auto;
+    max-width: min(100%, 52rem);
+  }
+
+  :global(.article-content img) {
+    height: auto;
+    width: auto;
+  }
+
+  :global(.article-content svg) {
+    width: min(100%, 52rem);
+    height: auto;
+    max-height: 80vh;
+  }
+
+  :global(#media-lightbox-content) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(#media-lightbox-content img) {
+    width: min(90vw, 80rem);
+    height: auto;
+  }
+
+  :global(#media-lightbox-content svg) {
+    max-width: 95vw;
+    max-height: 85vh;
+  }
+</style>

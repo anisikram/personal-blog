@@ -1,38 +1,34 @@
 [
   {
-    "company": "Tech Solutions Inc.",
+    "company": "NeoSoft",
     "title": "Développeur Fullstack Senior",
-    "startDate": "2022-01-01",
+    "startDate": "2025-08-01",
     "endDate": null,
-    "description": [
-      "Conception et développement d'applications web robustes en utilisant React et Node.js.",
-      "Mise en œuvre de microservices pour améliorer la scalabilité et la maintenabilité.",
-      "Collaboration avec les équipes produit pour définir les spécifications techniques."
-    ],
-    "technologies": ["React", "Node.js", "Express", "MongoDB", "AWS"]
+    "website": "https://www.neosoft.fr",
+    "logo": "/logos/neosoft.jpg"
   },
   {
-    "company": "Innovate Corp.",
-    "title": "Développeur Frontend",
-    "startDate": "2019-06-01",
-    "endDate": "2021-12-31",
-    "description": [
-      "Développement d'interfaces utilisateur interactives avec Vue.js.",
-      "Optimisation des performances frontend et amélioration de l'expérience utilisateur.",
-      "Participation à la refonte de l'architecture CSS."
-    ],
-    "technologies": ["Vue.js", "JavaScript", "HTML", "CSS", "Webpack"]
+    "company": "Libon",
+    "title": "Développeur Fullstack Senior",
+    "startDate": "2023-01-01",
+    "endDate": "2025-07-31",
+    "website": "https://www.libon.com",
+    "logo": "/logos/libon.webp"
   },
   {
-    "company": "Startup XYZ",
-    "title": "Développeur Junior",
-    "startDate": "2017-09-01",
-    "endDate": "2019-05-31",
-    "description": [
-      "Développement de nouvelles fonctionnalités pour une plateforme e-commerce.",
-      "Maintenance et débogage du code existant.",
-      "Apprentissage des bonnes pratiques de développement logiciel."
-    ],
-    "technologies": ["Python", "Django", "PostgreSQL", "jQuery"]
+    "company": "Covea",
+    "title": "Développeur Fullstack",
+    "startDate": "2019-04-01",
+    "endDate": "2023-12-31",
+    "website": "https://www.covea.com/fr",
+    "logo": "/logos/covea.png"
+  },
+    {
+    "company": "CGI",
+    "title": "Développeur Fullstack Junior",
+    "startDate": "2017-10-01",
+    "endDate": "2019-03-31",
+    "website": "https://www.cgi.com/france/fr-fr",
+    "logo": "/logos/cgi.jpg"
   }
 ]

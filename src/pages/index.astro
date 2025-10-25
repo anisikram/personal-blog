@@ -16,7 +16,14 @@ const posts = (await getCollection('blog')).sort(
       <div class="space-y-6">
         {posts.map(post => (
           <div class="card bg-base-100 shadow-xl">
-            <figure><img src={post.data.image} alt={post.data.title} /></figure>
+            <figure class="h-56 overflow-hidden rounded-t-2xl sm:h-64">
+              <img
+                src={post.data.image}
+                alt={post.data.title}
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </figure>
             <div class="card-body">
               <h3 class="card-title">{post.data.title}</h3>
               <p>{post.data.description}</p>
