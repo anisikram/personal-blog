@@ -6,11 +6,14 @@ author: Anis Ikram
 image: /proxy.png
 ---
 
+
+## Introduction 
+
 Dans cet article, je vais tâcher d’expliquer en quoi consiste le patron de conception appelé **design pattern proxy**.  
 Un proxy, comme on le nomme communément entre développeurs, est un patron de conception qui entre dans la catégorie des **design patterns structurels**.  
 Cette catégorie englobe les patterns qui utilisent des interfaces, l’héritage et le polymorphisme afin de définir des ensembles plus larges.
 
----
+## Le Pattern proxy
 
 Un proxy permet au client un accès distant à une ressource grâce à une interface commune.  
 Il se substitue à cette ressource afin d’effectuer des actions avant ou après son accès.  

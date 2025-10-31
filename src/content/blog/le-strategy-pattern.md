@@ -6,11 +6,11 @@ author: "Anis Ikram"
 image: "/strategy.png"
 ---
 
-# Introduction
+## Introduction
 
 Dans la suite de cette série d’articles sur les design patterns, nous allons aborder le **Strategy pattern** (ou stratégie en bon français). Ce pattern appartient à la famille des patrons de conception comportementaux puisqu’il permet de sélectionner le comportement d’un objet (ou une stratégie, d’où le nom de ce pattern) durant l’exécution (*runtime*).
 
----
+## Le Pattern Strategy
 
 En effet, lorsqu’on débute, on a souvent l’habitude d’utiliser l’héritage et le polymorphisme pour implémenter et surcharger des comportements. Prenons, par exemple, le cas d’une classe `Animal` qui implémente une méthode `avancer()` :
 
@@ -47,6 +47,8 @@ Quel est le problème avec le code ci‑dessus ? Imaginons qu’on nous demande
 Mais il y a aussi une autre contrainte importante dans ce code qui ne saute pas tout de suite aux yeux : le comportement d’un oiseau est figé à la compilation. Il est impossible pour les objets de cette classe d’avancer autrement qu’en volant. Une fois le programme lancé, il ne sera plus jamais possible de faire marcher notre oiseau.
 
 Cet exemple illustre bien le principe de la **Composition over inheritance** en POO, qui consiste à favoriser la composition d’un objet par un autre afin d’implémenter un nouveau comportement, plutôt que d’utiliser l’héritage. Cela permet de changer de comportement de manière dynamique pendant l’exécution de notre programme et d’ajouter des comportements sans modifier la classe de base. Ainsi, notre oiseau pourra marcher ! En faisant cela, on respecte l’un des principes SOLID : le principe *Ouvert/Fermé* qui stipule que le code doit être ouvert à l’extension et fermé à la modification.
+
+## Exemple d'implémentation
 
 Voici l’implémentation de notre classe Oiseau en utilisant ce pattern :
 
@@ -136,6 +138,6 @@ Ici, on définit une *Functional Interface* représentant une fonction sans para
 
 Si l’on reprend l’exemple donné dans mon précédent article sur le proxy pattern : [Le Proxy Pattern](https://anisikram.fr/le-proxy-pattern/), vous remarquerez que nous utilisions déjà le Strategy pattern. En effet, l’interface `HeavyDataFetcher` représente une famille de stratégies à implémenter (par `HeavyDataSqlFetcher`, par exemple), sauf qu’ici, la classe cliente n’est pas `Animal`, mais bien la classe `Application` et sa méthode `main()`.
 
----
+## Conclusion
 
 Pour conclure, le Strategy pattern offre une solution souple pour gérer les variations de comportement en favorisant la composition sur l’héritage. Il permet de modifier les comportements dynamiquement, tout en respectant le principe *Ouvert/Fermé* des règles **SOLID**, ce qui améliore la maintenabilité du code. Avec l’arrivée des *functional interfaces* en Java 8, l’implémentation de ce pattern devient encore plus simple grâce aux expressions lambda, bien qu’il faille veiller à éviter la duplication de code. En résumé, le Strategy pattern est une approche efficace pour concevoir des objets capables d’adopter plusieurs comportements de manière flexible et évolutive.
