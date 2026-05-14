@@ -1,61 +1,255 @@
+/* ─── Fonts (must be first) ──────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui";
 
-.prose :where(pre) {
-    --tw-bg-opacity: 1;
-    background-color: hsl(var(--b2, var(--b1)) / var(--tw-bg-opacity));
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+/* ─── Custom themes (DaisyUI v5 format) ─────────────────────────────── */
+@plugin "daisyui/theme" {
+  name: "light";
+  default: false;
+  prefersdark: false;
+  color-scheme: light;
+  --color-base-100: oklch(97% 0.01 250);
+  --color-base-200: oklch(94% 0.008 250);
+  --color-base-300: oklch(90% 0.006 250);
+  --color-base-content: oklch(20% 0.03 260);
+  --color-primary: oklch(72% 0.17 55);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(55% 0.1 240);
+  --color-secondary-content: oklch(100% 0 0);
+  --color-accent: oklch(76% 0.15 55);
+  --color-accent-content: oklch(100% 0 0);
+  --color-neutral: oklch(50% 0.02 260);
+  --color-neutral-content: oklch(100% 0 0);
+  --color-info: oklch(55% 0.2 250);
+  --color-success: oklch(60% 0.15 160);
+  --color-warning: oklch(80% 0.15 80);
+  --color-error: oklch(55% 0.2 25);
 }
 
-.prose :where(code) {
-    font-family: monospace;
-    font-size: 0.875em;
-    padding: 0.2em 0.4em;
-    margin: 0;
-    border-radius: 0.2em;
-    background-color: hsl(var(--b2, var(--b1)) / var(--tw-bg-opacity));
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: oklch(20% 0.03 260);
+  --color-base-200: oklch(26% 0.025 255);
+  --color-base-300: oklch(32% 0.02 255);
+  --color-base-content: oklch(95% 0.01 250);
+  --color-primary: oklch(72% 0.17 55);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(55% 0.1 240);
+  --color-secondary-content: oklch(100% 0 0);
+  --color-accent: oklch(76% 0.15 55);
+  --color-accent-content: oklch(100% 0 0);
+  --color-neutral: oklch(70% 0.02 260);
+  --color-neutral-content: oklch(20% 0.03 260);
+  --color-info: oklch(65% 0.2 250);
+  --color-success: oklch(68% 0.15 160);
+  --color-warning: oklch(85% 0.15 80);
+  --color-error: oklch(65% 0.2 25);
+}
+
+/* ─── Font tokens ───────────────────────────────────────────────────── */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ─── Body ──────────────────────────────────────────────────────────── */
+body {
+  font-family: var(--font-sans);
+}
+
+/* ─── Animations ────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Stagger child animations */
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+
+/* ─── Utility classes ───────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(72% 0.17 55), oklch(55% 0.1 240));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: oklch(97% 0.01 250 / 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme="dark"] .glass {
+  background: oklch(20% 0.03 260 / 0.7);
+}
+
+/* ─── Prose — Article content ───────────────────────────────────────── */
+.prose {
+  font-family: var(--font-sans);
+  line-height: 1.8;
+}
+
+.prose :where(code, pre) {
+  font-family: var(--font-mono);
+}
+
+/* Code blocks (Shiki-generated <pre>) */
+.prose :where(pre) {
+  position: relative;
+  border-radius: 0.75rem;
+  padding: 2.5rem 1.5rem 1.5rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border: 1px solid oklch(0% 0 0 / 0.08);
+  box-shadow: 0 2px 12px oklch(0% 0 0 / 0.06);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+/* Decorative "traffic light" dots */
+.prose :where(pre)::before {
+  content: '';
+  position: absolute;
+  top: 0.85rem;
+  left: 1rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: oklch(65% 0.2 25);
+  box-shadow:
+    1.1rem 0 0 oklch(80% 0.18 95),
+    2.2rem 0 0 oklch(70% 0.18 150);
+}
+
+/* Shiki dual theme: swap CSS variables based on data-theme */
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Inline <code> */
+.prose :where(code):not(pre code) {
+  font-size: 0.85em;
+  padding: 0.2em 0.45em;
+  margin: 0;
+  border-radius: 0.3em;
+  background-color: var(--color-base-200);
+  border: 1px solid oklch(0% 0 0 / 0.06);
+  color: var(--color-primary);
+  font-weight: 500;
 }
 
 .prose :where(a) {
-    text-decoration: underline;
-    text-decoration-color: hsl(var(--p) / 0.4);
-    transition: all 0.2s ease-in-out;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: oklch(72% 0.17 55 / 0.3);
+  text-underline-offset: 3px;
+  transition: all 0.2s ease-in-out;
 }
 
 .prose :where(a):hover {
-    text-decoration-color: hsl(var(--p));
+  text-decoration-color: var(--color-primary);
 }
 
 .prose :where(h1, h2, h3, h4, h5, h6) {
-    scroll-margin-top: 5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    margin-top: 2.5rem;
+  scroll-margin-top: 5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
+  letter-spacing: -0.02em;
 }
 
-.prose h1 {
-    font-size: 2.5em;
+.prose h1 { font-size: 2.5em; }
+.prose h2 { font-size: 2em; }
+.prose h3 { font-size: 1.75em; }
+.prose h4 { font-size: 1.5em; }
+.prose h5 { font-size: 1.25em; }
+.prose h6 { font-size: 1em; }
+
+.prose :where(blockquote) {
+  border-left: 4px solid var(--color-primary);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  background: oklch(72% 0.17 55 / 0.05);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
 }
 
-.prose h2 {
-    font-size: 2em;
+.prose :where(ul) {
+  list-style-type: disc;
+  padding-left: 1.5rem;
 }
 
-.prose h3 {
-    font-size: 1.75em;
+.prose :where(ol) {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
 }
 
-.prose h4 {
-    font-size: 1.5em;
+.prose :where(li) {
+  margin-bottom: 0.5rem;
 }
 
-.prose h5 {
-    font-size: 1.25em;
+.prose :where(img) {
+  border-radius: 0.75rem;
 }
 
-.prose h6 {
-    font-size: 1em;
+.prose :where(strong) {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ─── Section divider ───────────────────────────────────────────────── */
+.section-heading {
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, oklch(72% 0.17 55), oklch(55% 0.1 240));
+  margin-top: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 2px;
 }

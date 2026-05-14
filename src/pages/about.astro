@@ -1,47 +1,159 @@
 ---
 import BlogLayout from "../layouts/BlogLayout.astro";
+import CV from "../components/CV.astro";
 ---
 
-<BlogLayout title="À propos de moi">
-  <div class="prose">
-    <h1>À propos de moi</h1>
-    <p>
-      Bonjour, moi c’est Anis&nbsp;Ikram. Mon histoire avec l’informatique a
-      commencé vers 12&nbsp;ans, quand je rêvais de créer <strong>LE</strong> jeu
-      vidéo qui allait révolutionner le monde… et qui est finalement resté bien au
-      chaud dans ma tête (et quelques lignes de code oubliées). Pour me consoler,
-      je me suis lancé dans la création de sites web dédiés à mes mangas préférés&nbsp;–
-      preuve que, même jeune, j’avais déjà un goût prononcé pour les univers imaginaires
-      et le pixel parfait.
-    </p>
-  <br>
-    <p>
-      Entre deux lignes de code, vous me trouverez souvent sur un terrain de
-      sport. J’aime tout ce qui bouge, mais mon premier amour reste le <strong
-        >rugby</strong
-      >, que je pratique depuis mes 15&nbsp;ans. Rien de tel qu’une bonne mêlée
-      pour apprendre l’esprit d’équipe et la persévérance… des qualités bien
-      utiles quand il s’agit de déboguer un programme récalcitrant.
-    </p>
-  <br>
-    <p>
-      En tant que développeur, je suis passionné par les pratiques
-      «&nbsp;craft&nbsp;»&nbsp;:&nbsp;<strong
-        >TDD, Clean Code et Domain‑Driven Design</strong
-      > sont mes terrains de jeu préférés. J’essaie d’organiser mon code comme un
-      artisan range ses outils, et j’aime démystifier des concepts que j’ai longtemps
-      mal interprétés. Mais je reste convaincu que l’on apprend tous les jours&nbsp;:
-      je n’ai pas la prétention de tout savoir ni d’être un expert absolu.
-    </p>
-  <br>
-    <p>
-      C’est dans cet état d’esprit que j’ai créé ce blog. Je souhaite partager
-      mes réflexions, mes découvertes et mes expériences, qu’elles soient
-      techniques ou plus personnelles. Si vous tombez sur une erreur, un
-      raccourci douteux ou si vous pensez qu’un sujet mérite d’être approfondi, <strong
-        >n’hésitez pas à me contacter</strong
-      >&nbsp;: je serai ravi d’échanger et d’enrichir mes articles grâce à vos
-      retours. Après tout, c’est en partageant qu’on progresse !
-    </p>
+<BlogLayout title="À propos" description="Découvrez Anis Ikram, Software Engineer passionné par Java, le craft logiciel et les design patterns.">
+  <div class="container mx-auto px-6 py-12">
+
+    <!-- Page header -->
+    <div class="text-center mb-12 animate-fade-in-up">
+      <p class="text-sm font-semibold text-primary uppercase tracking-widest mb-3">À propos</p>
+      <h1 class="text-4xl font-bold section-heading mx-auto">Qui suis-je ?</h1>
+    </div>
+
+    <!-- Intro section -->
+    <section class="max-w-3xl mx-auto mb-16 animate-fade-in-up">
+      <div class="prose prose-lg max-w-none">
+        <p>
+          Bonjour, moi c'est <strong>Anis&nbsp;Ikram</strong>. Mon histoire avec l'informatique a
+          commencé vers 12&nbsp;ans, quand je rêvais de créer <strong>LE</strong> jeu
+          vidéo qui allait révolutionner le monde… et qui est finalement resté bien au
+          chaud dans ma tête (et quelques lignes de code oubliées). Pour me consoler,
+          je me suis lancé dans la création de sites web dédiés à mes mangas préférés&nbsp;–
+          preuve que, même jeune, j'avais déjà un goût prononcé pour les univers imaginaires
+          et le pixel parfait.
+        </p>
+        <p>
+          Entre deux lignes de code, vous me trouverez souvent sur un terrain de
+          sport. J'aime tout ce qui bouge, mais mon premier amour reste le <strong>rugby</strong>,
+          que je pratique depuis mes 15&nbsp;ans. Rien de tel qu'une bonne mêlée
+          pour apprendre l'esprit d'équipe et la persévérance… des qualités bien
+          utiles quand il s'agit de déboguer un programme récalcitrant.
+        </p>
+      </div>
+    </section>
+
+    <!-- Skills & Values -->
+    <section class="mb-16 text-center">
+      <h2 class="text-2xl font-bold mb-8 section-heading">Mes convictions techniques</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger-children max-w-4xl mx-auto">
+        <!-- TDD -->
+        <div class="card bg-base-100 border border-base-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-in-up">
+          <div class="card-body items-center text-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-base">TDD</h3>
+            <p class="text-sm text-base-content/60">Tester d'abord, coder ensuite. La qualité commence par les tests.</p>
+          </div>
+        </div>
+
+        <!-- Clean Code -->
+        <div class="card bg-base-100 border border-base-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-in-up">
+          <div class="card-body items-center text-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-secondary" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-base">Clean Code</h3>
+            <p class="text-sm text-base-content/60">Un code propre est un code qui communique clairement son intention.</p>
+          </div>
+        </div>
+
+        <!-- DDD -->
+        <div class="card bg-base-100 border border-base-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-in-up">
+          <div class="card-body items-center text-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-base">DDD</h3>
+            <p class="text-sm text-base-content/60">Modéliser le métier, pas la technique. Le domaine guide l'architecture.</p>
+          </div>
+        </div>
+
+        <!-- Java -->
+        <div class="card bg-base-100 border border-base-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-in-up">
+          <div class="card-body items-center text-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center mb-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-secondary" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.762.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573" />
+                <path d="M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.929 4.562 0-.001.07-.062.091-.118" />
+                <path d="M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.889 4.832 0 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.189-7.627" />
+                <path d="M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-base">Java</h3>
+            <p class="text-sm text-base-content/60">Mon langage de prédilection. J'explore ses rouages en profondeur.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="max-w-3xl mx-auto mb-16 animate-fade-in-up">
+      <div class="prose prose-lg max-w-none">
+        <p>
+          J'essaie d'organiser mon code comme un artisan range ses outils, et j'aime démystifier
+          des concepts que j'ai longtemps mal interprétés. Mais je reste convaincu que l'on apprend
+          tous les jours&nbsp;: je n'ai pas la prétention de tout savoir ni d'être un expert absolu.
+        </p>
+        <p>
+          C'est dans cet état d'esprit que j'ai créé ce blog. Je souhaite partager
+          mes réflexions, mes découvertes et mes expériences, qu'elles soient
+          techniques ou plus personnelles. Si vous tombez sur une erreur, un
+          raccourci douteux ou si vous pensez qu'un sujet mérite d'être approfondi,
+          <strong>n'hésitez pas à me contacter</strong>&nbsp;: je serai ravi d'échanger
+          et d'enrichir mes articles grâce à vos retours. Après tout, c'est en partageant
+          qu'on progresse !
+        </p>
+      </div>
+    </section>
+
+    <!-- Experience / CV -->
+    <section class="mb-16 max-w-3xl mx-auto text-center">
+      <h2 class="text-2xl font-bold mb-8 section-heading">Parcours professionnel</h2>
+      <CV />
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="max-w-2xl mx-auto text-center animate-fade-in-up">
+      <div class="card bg-gradient-to-br from-primary/5 to-secondary/5 border border-base-200 p-8">
+        <h2 class="text-xl font-bold mb-3">Envie d'échanger ?</h2>
+        <p class="text-base-content/60 mb-6">
+          Que ce soit pour discuter technique, proposer une collaboration ou simplement dire bonjour.
+        </p>
+        <div class="flex justify-center gap-4">
+          <a
+            href="https://github.com/anisikram"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="fill-current">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/anis-ikram-1ab910146/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-secondary btn-sm gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+            </svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
   </div>
 </BlogLayout>

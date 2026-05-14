@@ -2,20 +2,25 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../assets/app.css";
-const { title } = Astro.props;
+import "katex/dist/katex.min.css";
+const { title, description = "Blog technique sur Java, le craft et le développement logiciel par Anis Ikram." } = Astro.props;
 ---
 <!doctype html>
-<html lang="fr" data-theme="cupcake">
+<html lang="fr" data-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} | Le Blog d'Anis Ikram</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={`${title} | Anis Ikram`} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<title>{title} | Anis Ikram</title>
 	</head>
-	<body class="flex flex-col min-h-screen">
+	<body class="flex flex-col min-h-screen bg-base-100 text-base-content">
 		<Header />
-		<main class="container mx-auto px-4 py-8 flex-grow">
+		<main class="flex-grow">
 			<slot />
 		</main>
 		<Footer />

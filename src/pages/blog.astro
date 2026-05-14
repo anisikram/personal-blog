@@ -1,39 +1,44 @@
 ---
 import { getCollection } from 'astro:content';
 import BlogLayout from '../layouts/BlogLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 
 const allPosts = await getCollection('blog');
 allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
 ---
 
-<BlogLayout title="Blog">
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold text-center mb-8">Mes articles :</h1>
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+<BlogLayout title="Blog" description="Articles techniques sur Java, les design patterns, et le craft logiciel.">
+  <section class="container mx-auto px-6 py-12">
+    <!-- Page header -->
+    <div class="text-center mb-12 animate-fade-in-up">
+      <p class="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Blog</p>
+      <h1 class="text-4xl font-bold section-heading mx-auto">Mes Articles</h1>
+      <p class="mt-4 text-base-content/60 max-w-xl mx-auto">
+        Réflexions, tutoriels et explorations autour de Java, des design patterns et du craft logiciel.
+      </p>
+    </div>
+
+    <!-- Articles grid -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 stagger-children">
       {allPosts.map(post => (
-        <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-          <figure><img src={post.data.image} alt={post.data.title} /></figure>
-          <div class="card-body">
-            <h2 class="card-title">
-              <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-            </h2>
-            <p>{post.data.description}</p>
-            <div class="card-actions justify-end mt-4">
-				<div class="text-sm text-gray-500 mt-4">
-					<span>{post.data.author}</span> &bull; 
-					<time datetime={post.data.date.toISOString()}>
-						{post.data.date.toLocaleDateString('fr-FR', {
-							year: 'numeric',
-							month: 'long',
-							day: 'numeric',
-						})}
-					</time>
-				</div>
-            </div>
-          </div>
+        <div class="animate-fade-in-up">
+          <ArticleCard
+            title={post.data.title}
+            description={post.data.description}
+            image={post.data.image}
+            slug={post.slug}
+            author={post.data.author}
+            date={post.data.date}
+          />
         </div>
       ))}
     </div>
-  </div>
+
+    {allPosts.length === 0 && (
+      <div class="text-center py-20">
+        <p class="text-xl text-base-content/40">Aucun article pour le moment.</p>
+        <p class="text-base-content/30 mt-2">Revenez bientôt !</p>
+      </div>
+    )}
+  </section>
 </BlogLayout>

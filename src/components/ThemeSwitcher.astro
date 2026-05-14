@@ -1,7 +1,7 @@
 ---
 ---
 <label class="swap swap-rotate btn btn-ghost">
-	<input type="checkbox" class="theme-controller" value="dark" data-toggle-theme="dark,cupcake" />
+	<input type="checkbox" class="theme-controller" value="dark" data-toggle-theme="dark,light" />
 	<span class="swap-off"
 		><svg
 			class="w-5 h-5"
@@ -56,7 +56,7 @@
 		if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
 			return "dark";
 		}
-		return "cupcake";
+		return "dark";
 	})();
 
 	document.documentElement.setAttribute("data-theme", theme);
@@ -65,7 +65,7 @@
 		themeController.checked = true;
 	}
 	themeController.addEventListener("change", (e) => {
-		const newTheme = e.target.checked ? "dark" : "cupcake";
+		const newTheme = e.target.checked ? "dark" : "light";
 		document.documentElement.setAttribute("data-theme", newTheme);
 		localStorage.setItem("theme", newTheme);
 	});

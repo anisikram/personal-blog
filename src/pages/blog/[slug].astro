@@ -13,37 +13,75 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, headings } = await post.render();
+
+const formattedDate = post.data.date.toLocaleDateString('fr-FR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 
-<BlogLayout title={post.data.title}>
-  <div class="container mx-auto px-4 py-8">
-    <div class="flex flex-wrap lg:flex-nowrap">
+<BlogLayout title={post.data.title} description={post.data.description}>
+  <div class="container mx-auto px-6 py-8">
+    <div class="flex flex-wrap lg:flex-nowrap gap-8">
+
+      {/* Table of Contents - sidebar */}
       {headings && headings.length > 0 && (
-        <aside class="w-full lg:w-1/4 lg:pr-8 mb-8 lg:mb-0">
+        <aside class="w-full lg:w-72 shrink-0 lg:pr-4 mb-8 lg:mb-0">
           <div class="sticky top-20">
-            <div class="p-4 bg-base-200 rounded-lg">
-              <h2 class="text-xl font-bold mb-2">Table des matières</h2>
-              <ul>
+            <nav class="p-5 bg-base-200/50 rounded-xl border border-base-200" aria-label="Table des matières">
+              <h2 class="text-sm font-bold uppercase tracking-wider text-base-content/50 mb-3">Table des matières</h2>
+              <ul class="space-y-1.5 text-sm" id="toc-list">
                 {headings.map(heading => (
-                  <li class={`ml-${(heading.depth - 1) * 4}`}>
-                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                  <li style={`padding-left: ${(heading.depth - 1) * 1}rem`}>
+                    <a
+                      href={`#${heading.slug}`}
+                      class="toc-link block py-1 px-2 rounded-md text-base-content/60 hover:text-primary hover:bg-primary/5 transition-all duration-200 leading-snug"
+                      data-heading-slug={heading.slug}
+                    >
+                      {heading.text}
+                    </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           </div>
         </aside>
       )}
 
-      <main class="w-full lg:w-3/4">
+      {/* Article content */}
+      <main class="w-full min-w-0 lg:flex-1">
         <article class="prose lg:prose-xl max-w-none">
-          <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold">{post.data.title}</h1>
-            <p class="text-lg italic">
-              Publié le: {post.data.date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })} par {post.data.author}
-            </p>
+          {/* Article header */}
+          <div class="not-prose mb-10 animate-fade-in-up">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight mb-4">{post.data.title}</h1>
+            <div class="flex items-center gap-4 text-sm text-base-content/50">
+              <div class="flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+                <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
+              </div>
+              <span class="text-base-content/20">•</span>
+              <div class="flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                </svg>
+                <span>{post.data.author}</span>
+              </div>
+            </div>
           </div>
-          <img src={post.data.image} alt={post.data.title} class="w-full h-auto rounded-lg mb-8">
+
+          {/* Hero image */}
+          {post.data.image && (
+            <img
+              src={post.data.image}
+              alt={post.data.title}
+              class="w-full h-auto rounded-xl mb-10 shadow-lg"
+            />
+          )}
+
+          {/* Content */}
           <div class="article-content space-y-6">
             <Content />
           </div>
@@ -88,4 +126,52 @@ const { Content, headings } = await post.render();
     max-width: 95vw;
     max-height: 85vh;
   }
+
+  /* Active ToC link */
+  :global(.toc-link.active) {
+    color: hsl(var(--p));
+    background: hsl(var(--p) / 0.08);
+    font-weight: 600;
+  }
 </style>
+
+<script>
+  // Highlight active ToC item based on scroll position
+  function initTocHighlight() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    if (!tocLinks.length) return;
+
+    const headingSlugs = Array.from(tocLinks).map(link =>
+      (link as HTMLElement).dataset.headingSlug
+    );
+
+    const headingElements = headingSlugs
+      .map(slug => slug ? document.getElementById(slug) : null)
+      .filter(Boolean) as HTMLElement[];
+
+    if (!headingElements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(
+              `.toc-link[data-heading-slug="${entry.target.id}"]`
+            );
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -70% 0px', threshold: 0 }
+    );
+
+    headingElements.forEach(el => observer.observe(el));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTocHighlight);
+  } else {
+    initTocHighlight();
+  }
+</script>
