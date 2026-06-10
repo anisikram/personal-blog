@@ -1,6 +1,6 @@
 ---
 title: "Comment fonctionne HashMap et HashSet en Java"
-date: 2026-05-20
+date: 2026-06-06
 description: Comprendre HashMap et HashSet pour mieux les utiliser
 author: Anis Ikram
 image: /hashmap-hashset.png
@@ -54,7 +54,7 @@ Ces deux méthodes sont soumises à un contrat au sein de la JVM, si vous les re
 En règle générale, lors de la redéfinition de ces méthodes, il est bon de se baser sur les mêmes propriétés pour la génération du `hashCode()` et la comparaison dans `equals()`.
 Les **records** redéfinissent automatiquement ces méthodes en se basant sur chacun de leurs composants car on estime que leur identité est définie par l'ensemble de leurs propriétés. Leur caractère immutable garantit que `hashCode()`générera toujours la même valeur  pour une même instance. 
 
-Si on y réfléchit bien ces règles assurent le bon fonctionnement de notre système. Reprenons notre analogie du bureau de poste, imaginez si on recevait des copies d'un courrier pour un même destinataire et qu'ils étaient rangés dans des tiroirs différents ? ou encore que le courrier pourrait changer de destinataire tout en restant rangé dans le mauvais tiroir en conséquence ? On ne le retrouverait pas, `map.get()` retournerait `null`, il est important que la clé ne change pas de façon à ne pas générer un `hashCode()` différent et continuer à être `equals()`. On préférera donc  toujours des clés immutables (c'est également le cas pour les éléments contenus dans HashSet).
+Si on y réfléchit bien ces règles assurent le bon fonctionnement de notre système. Reprenons notre analogie du bureau de poste, imaginez si on recevait des copies d'un courrier pour un même destinataire et qu'ils étaient rangés dans des tiroirs différents. ou encore que le courrier pourrait changer de destinataire tout en restant rangé dans le mauvais tiroir en conséquence. On ne le retrouverait pas, `map.get()` retournerait `null` et c'est sans parler de la fuite mémoire car l'objet reste référencé dans la HashMap donc inéligible au garbage collector mais il est inaccessible. Il est important que la clé ne change pas de façon à ne pas générer un `hashCode()` différent et continuer à être `equals()`. On préférera donc  toujours des clés immutables (c'est également le cas pour les éléments contenus dans HashSet).
 
 Maintenant qu'on a appréhendé les concepts de base, soulevons le capot de HashMap pour voir ce qui s'y passe en détail.
 
