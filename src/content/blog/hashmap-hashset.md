@@ -65,7 +65,7 @@ Mais comment cela s'organise dans le code ?
 En interne, l'implémentation repose sur un tableau où chaque cellule représente un tiroir dans notre fameux bureau de poste. On parle  alors d'un ***bucket*** (un panier) dans le jargon. Pourquoi un tableau ? Je ne rentrerai pas dans le détail ici (qui pourrait faire l'objet d'un article à part entière) mais les tableaux sont des espaces mémoire contigus qui permettent quelques optimisations du CPU dans ses accès à la mémoire. 
 Dans chaque bucket (notre tiroir), on retrouve un nœud qui est le premier élément d'une liste chaînée.
 
-```Java
+```java
 static class Node<K,V> implements Map.Entry<K,V> {
         final int hash;
         final K key;
@@ -121,7 +121,7 @@ Vous noterez que tout au long de cet article, je n'ai parlé que de HashMap, en 
 
 En effet, Java réutilise l'implémentation de HashMap. Comme un Set ne stocke qu'une valeur, et non un couple clé-valeur, cette valeur est rangée à la place de la clé ; on utilise alors un objet placeholder comme valeur.
 
-```
+```java
 private static Object PRESENT = new Object();
 ``` 
 
